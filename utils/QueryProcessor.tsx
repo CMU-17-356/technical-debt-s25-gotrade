@@ -16,7 +16,7 @@ export default function QueryProcessor(query: string): string {
   if (query.toLowerCase().includes("plus")) {
     const match = query.match(/What is (\d+)\s+plus\s+(\d+)/i);
     if (!match) {
-      throw new Error("Question format not recognized. Expected: 'What is X plus Y'");
+      return "";
     }
 
     const num1 = parseInt(match[1], 10);
@@ -27,7 +27,7 @@ export default function QueryProcessor(query: string): string {
   if (query.toLowerCase().includes("minus")) {
     const match = query.match(/What is (\d+)\s+minus\s+(\d+)/i);
     if (!match) {
-      throw new Error("Question format not recognized. Expected: 'What is X minus Y'");
+      return "";
     }
 
     const num1 = parseInt(match[1], 10);
@@ -38,7 +38,7 @@ export default function QueryProcessor(query: string): string {
   if (query.toLowerCase().includes("largest")) {
     const match = query.match(/Which of the following numbers is the largest: ([\d,\s]+)/i);
     if (!match) {
-      throw new Error("Question format not recognized. Expected: 'Which of the following numbers is the largest: X, Y, Z'");
+      return "";
     }
 
     const numbers = match[1].split(",").map(num => parseInt(num.trim(), 10));
@@ -49,7 +49,7 @@ export default function QueryProcessor(query: string): string {
   if (query.toLowerCase().includes("both a square and a cube")) {
     const match = query.match(/Which of the following numbers is both a square and a cube: ([\d,\s]+)/i);
     if (!match) {
-      throw new Error("Question format not recognized. Expected: 'Which of the following numbers is both a square and a cube: X, Y, Z'");
+      return "";
     }
 
     const numbers = match[1].split(",").map(num => parseInt(num.trim(), 10));
@@ -67,7 +67,7 @@ export default function QueryProcessor(query: string): string {
   if (query.toLowerCase().includes("multiplied by")) {
     const match = query.match(/What is (\d+)\s+multiplied by\s+(\d+)/i);
     if (!match) {
-      throw new Error("Question format not recognized. Expected: 'What is X multiplied by Y'");
+      return "";
     }
 
     const num1 = parseInt(match[1], 10);
@@ -78,7 +78,7 @@ export default function QueryProcessor(query: string): string {
   if (query.toLowerCase().includes("are primes")) {
     const match = query.match(/Which of the following numbers are primes: ([\d,\s]+)/i);
     if (!match) {
-      throw new Error("Question format not recognized. Expected: 'Which of the following numbers are primes: X, Y, Z'");
+      return "";
     }
 
     const numbers = match[1].split(",").map(num => parseInt(num.trim(), 10));
@@ -99,7 +99,7 @@ export default function QueryProcessor(query: string): string {
   if (query.toLowerCase().includes("to the power of")) {
     const match = query.match(/What is (\d+)\s+to\s+the\s+power\s+of\s+(\d+)/i);
     if (!match) {
-      throw new Error("Question format not recognized. Expected: 'What is X to the power of Y'");
+      return "";
     }
 
     const base = parseInt(match[1], 10);
@@ -111,7 +111,7 @@ export default function QueryProcessor(query: string): string {
   if (query.toLowerCase().includes("plus") && (query.match(/plus/g) || []).length >= 2) {
     const match = query.match(/What is (.+) plus/i);
     if (!match) {
-      throw new Error("Question format not recognized. Expected: 'What is X plus Y plus Z'");
+      return "";
     }
   
     const numbers = match[1].split("plus").map(num => parseInt(num.trim(), 10));
@@ -122,7 +122,7 @@ export default function QueryProcessor(query: string): string {
   if (query.toLowerCase().includes("to the power of")) {
     const match = query.match(/What is (\d+)\s+to the power of\s+(\d+)/i);
     if (!match) {
-      throw new Error("Question format not recognized. Expected: 'What is X to the power of Y'");
+      return "";
     }
 
     const base = parseInt(match[1], 10);
