@@ -14,7 +14,14 @@ export default function QueryProcessor(query: string): string {
   }
 
   if (query.toLowerCase().includes("plus")) {
-    return evaluate(query);
+    const match = query.match(/What is (\d+)\s+plus\s+(\d+)/i);
+    if (!match) {
+      throw new Error("Question format not recognized. Expected: 'What is X plus Y'");
+    }
+
+    const num1 = parseInt(match[1], 10);
+    const num2 = parseInt(match[2], 10);
+    return `${num1 + num2}`;
   }
 
   return "";
