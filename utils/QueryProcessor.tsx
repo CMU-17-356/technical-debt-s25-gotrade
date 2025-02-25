@@ -109,7 +109,7 @@ export default function QueryProcessor(query: string): string {
   }
 
   if (query.toLowerCase().includes("plus") && (query.match(/plus/g) || []).length >= 2) {
-    const match = query.match(/What is ([\d+\s+]+) plus/i);
+    const match = query.match(/What is (.+) plus/i);
     if (!match) {
       throw new Error("Question format not recognized. Expected: 'What is X plus Y plus Z'");
     }
