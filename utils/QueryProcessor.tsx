@@ -24,29 +24,15 @@ export default function QueryProcessor(query: string): string {
     return `${num1 + num2}`;
   }
 
-  if (query.toLowerCase().includes("minus")) {
-    const match = query.match(/What is (\d+)\s+plus\s+(\d+)/i);
+  if (query.toLowerCase().includes("largest")) {
+    const match = query.match(/Which of the following numbers is the largest: ([\d,\s]+)/i);
     if (!match) {
-      throw new Error("Question format not recognized. Expected: 'What is X plus Y'");
+      throw new Error("Question format not recognized. Expected: 'Which of the following numbers is the largest: X, Y, Z'");
     }
 
-    const num1 = parseInt(match[1], 10);
-    const num2 = parseInt(match[2], 10);
-    return `${num1 - num2}`;
-  }
-
-  if (query.toLowerCase().includes("Which of the following numbers is the largest: ")) {
-      const numbersMatch = query.match(/\d+/g);
-      if (!numbersMatch) {
-        throw new Error("No numbers found in the question.");
-      }
-      const numbers = numbersMatch.map(Number);
-  
-      if (numbers.length === 0) {
-        throw new Error("No numbers found in the question.");
-      }
-  
-      return String(Math.max(...numbers)); //
+    const numbers = match[1].split(",").map(num => parseInt(num.trim(), 10));
+    const largest = Math.max(...numbers);
+    return `${largest}`;
   }
 
   return "";
