@@ -75,5 +75,26 @@ export default function QueryProcessor(query: string): string {
     return `${num1 * num2}`;
   }
 
+  if (query.toLowerCase().includes("are primes")) {
+    const match = query.match(/Which of the following numbers are primes: ([\d,\s]+)/i);
+    if (!match) {
+      throw new Error("Question format not recognized. Expected: 'Which of the following numbers are primes: X, Y, Z'");
+    }
+
+    const numbers = match[1].split(",").map(num => parseInt(num.trim(), 10));
+
+    // Function to check if a number is prime
+    const isPrime = (num: number) => {
+      if (num < 2) return false;
+      for (let i = 2; i * i <= num; i++) {
+        if (num % i === 0) return false;
+      }
+      return true;
+    };
+
+    const primeNumbers = numbers.filter(isPrime);
+    return primeNumbers.length > 0 ? primeNumbers.join(", ") : "None";
+  }
+
   return "";
 }
