@@ -1,3 +1,5 @@
+import { evaluate } from "mathjs";  
+
 export default function QueryProcessor(query: string): string {
   if (query.toLowerCase().includes("shakespeare")) {
     return (
@@ -8,7 +10,11 @@ export default function QueryProcessor(query: string): string {
   }
 
   if (query.toLowerCase().includes("name")) {
-    return "Xinyi";
+    return "Shivam, Khuslen, Dhanya";
+  }
+
+  if (query.toLowerCase().includes("plus")) {
+    return evaluate(query);
   }
 
   return "";
