@@ -134,5 +134,21 @@ export default function QueryProcessor(query: string): string {
     return result.toString(); // Convert BigInt to string for output
   }
 
+  if (query.toLowerCase().includes("plus") && query.toLowerCase().includes("multiplied by")) {
+    const match = query.match(/What is ([\d\s\+*]+) multiplied by (\d+) plus (\d+)/i);
+    if (!match) {
+      throw new Error("Question format not recognized. Expected: 'What is X multiplied by Y plus Z'");
+    }
+  
+    const num1 = parseInt(match[1].trim(), 10);
+    const num2 = parseInt(match[2].trim(), 10);
+    const num3 = parseInt(match[3].trim(), 10);
+  
+    const multiplicationResult = num1 * num2;
+    const result = multiplicationResult + num3;
+  
+    return `${result}`;
+  }
+
   return "";
 }
