@@ -96,5 +96,28 @@ export default function QueryProcessor(query: string): string {
     return primeNumbers.length > 0 ? primeNumbers.join(", ") : "None";
   }
 
+  if (query.toLowerCase().includes("to the power of")) {
+    const match = query.match(/What is (\d+)\s+to\s+the\s+power\s+of\s+(\d+)/i);
+    if (!match) {
+      throw new Error("Question format not recognized. Expected: 'What is X to the power of Y'");
+    }
+
+    const base = parseInt(match[1], 10);
+    const exponent = parseInt(match[2], 10);
+    const result = Math.pow(base, exponent);
+    return `${result}`;
+  }
+
+  if (query.toLowerCase().includes("plus")) {
+    const match = query.match(/What is ([\d+\s+]+) plus/i);
+    if (!match) {
+      throw new Error("Question format not recognized. Expected: 'What is X plus Y plus Z'");
+    }
+  
+    const numbers = match[1].split("plus").map(num => parseInt(num.trim(), 10));
+    const sum = numbers.reduce((acc, num) => acc + num, 0);
+    return `${sum}`;
+  }
+  
   return "";
 }
