@@ -25,9 +25,9 @@ export default function QueryProcessor(query: string): string {
   }
 
   if (query.toLowerCase().includes("minus")) {
-    const match = query.match(/What is (\d+)\s+plus\s+(\d+)/i);
+    const match = query.match(/What is (\d+)\s+minus\s+(\d+)/i);
     if (!match) {
-      throw new Error("Question format not recognized. Expected: 'What is X plus Y'");
+      throw new Error("Question format not recognized. Expected: 'What is X minus Y'");
     }
 
     const num1 = parseInt(match[1], 10);
