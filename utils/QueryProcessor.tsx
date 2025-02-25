@@ -119,5 +119,20 @@ export default function QueryProcessor(query: string): string {
     return `${sum}`;
   }
 
+  if (query.toLowerCase().includes("to the power of")) {
+    const match = query.match(/What is (\d+)\s+to the power of\s+(\d+)/i);
+    if (!match) {
+      throw new Error("Question format not recognized. Expected: 'What is X to the power of Y'");
+    }
+
+    const base = parseInt(match[1], 10);
+    const exponent = parseInt(match[2], 10);
+    
+    // Use `BigInt` for handling large numbers
+    const result = BigInt(base) ** BigInt(exponent);
+
+    return result.toString(); // Convert BigInt to string for output
+  }
+
   return "";
 }
