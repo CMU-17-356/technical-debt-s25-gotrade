@@ -108,7 +108,7 @@ export default function QueryProcessor(query: string): string {
     return `${result}`;
   }
 
-  if (query.toLowerCase().includes("plus")) {
+  if (query.toLowerCase().includes("plus") && (query.match(/plus/g) || []).length >= 2) {
     const match = query.match(/What is ([\d+\s+]+) plus/i);
     if (!match) {
       throw new Error("Question format not recognized. Expected: 'What is X plus Y plus Z'");
@@ -118,6 +118,6 @@ export default function QueryProcessor(query: string): string {
     const sum = numbers.reduce((acc, num) => acc + num, 0);
     return `${sum}`;
   }
-  
+
   return "";
 }
